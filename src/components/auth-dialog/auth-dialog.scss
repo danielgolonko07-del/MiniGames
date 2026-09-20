@@ -1,0 +1,336 @@
+@use "../../styles/tokens" as tokens;
+
+
+$dialog-width: 420px;
+$dialog-border: 2px;
+$input-height: 48px;
+$animation-speed: 180ms;
+
+
+.auth-dialog {
+  width: $dialog-width;
+  max-width: calc(100vw - tokens.$size-4);
+  max-height: calc(100dvh - tokens.$size-4);
+  margin: auto;
+  padding: tokens.$size-4 tokens.$size-4 tokens.$size-3;
+  overflow-y: auto;
+  border: $dialog-border solid tokens.$color-on-primary;
+  border-radius: tokens.$corner-extra-large;
+  background: tokens.$color-white;
+  color: tokens.$color-on-primary;
+  box-shadow: tokens.$shadow-level-2;
+  font-family: tokens.$font-inter;
+  animation: auth-dialog-in $animation-speed ease-out both;
+}
+
+.auth-dialog::backdrop {
+  background: rgb(30 27 58 / 70%);
+  animation: auth-backdrop-in $animation-speed ease-out both;
+}
+
+.auth-dialog-closing {
+  animation: auth-dialog-out $animation-speed ease-in both;
+}
+
+.auth-dialog-closing::backdrop {
+  animation: auth-backdrop-out $animation-speed ease-in both;
+}
+
+.auth-dialog-content {
+  min-width: 0;
+}
+
+.auth-dialog-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: tokens.$size-3;
+  border: $dialog-border solid tokens.$color-on-primary;
+  border-radius: tokens.$corner-medium;
+  overflow: hidden;
+}
+
+.auth-dialog-tab {
+  min-height: $input-height;
+  padding: tokens.$size-1;
+  border: 0;
+  background: tokens.$color-white;
+  color: tokens.$color-on-bg;
+  font: inherit;
+  font-size: tokens.$font-label-extra-large;
+  font-weight: tokens.$font-weight-bold;
+  cursor: pointer;
+  transition:
+    background-color $animation-speed ease,
+    color $animation-speed ease;
+}
+
+.auth-dialog-tab-active {
+  background: tokens.$color-on-primary;
+  color: tokens.$color-white;
+}
+
+.auth-dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$size-2;
+  animation: $animation-speed ease-out;
+}
+
+
+.auth-dialog-form[hidden] {
+  display: none;
+}
+
+.auth-dialog-title {
+  margin: 0;
+  font-size: tokens.$font-headline-medium;
+  font-weight: tokens.$font-weight-bold;
+  line-height: 1.2;
+}
+
+.auth-dialog-description {
+  margin: calc(-1 * tokens.$size-1) 0 tokens.$size-1;
+  color: tokens.$color-on-bg;
+  font-size: tokens.$font-body-small;
+  line-height: 1.4;
+}
+
+.auth-dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$size-1;
+}
+
+.auth-dialog-field label {
+  font-size: tokens.$font-body-small;
+  font-weight: tokens.$font-weight-bold;
+}
+
+.auth-dialog-input-wrapper {
+  position: relative;
+}
+
+.auth-dialog-input-wrapper > svg {
+  position: absolute;
+  top: 50%;
+  left: tokens.$size-2;
+  width: tokens.$size-2;
+  height: tokens.$size-2;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: tokens.$color-on-bg;
+  stroke-width: $dialog-border;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.auth-dialog-input-wrapper input {
+  width: 100%;
+  min-width: 0;
+  min-height: $input-height;
+  padding: tokens.$size-1 tokens.$size-5 tokens.$size-1 tokens.$size-6;
+  border: $dialog-border solid tokens.$color-on-primary;
+  border-radius: tokens.$corner-small;
+  outline: none;
+  background: tokens.$color-white;
+  color: tokens.$color-on-primary;
+  font: inherit;
+  font-size: tokens.$font-body-small;
+}
+
+.auth-dialog-input-wrapper input::placeholder {
+  color: tokens.$color-on-bg;
+  opacity: 1;
+}
+
+.auth-dialog-input-wrapper input:focus-visible,
+.auth-dialog button:focus-visible {
+  outline: $dialog-border solid tokens.$color-tertiary;
+  outline-offset: tokens.$size-05;
+}
+
+.auth-dialog-eye {
+  position: absolute;
+  top: 50%;
+  right: tokens.$size-1;
+  display: grid;
+  place-items: center;
+  width: tokens.$size-4;
+  height: tokens.$size-4;
+  padding: tokens.$size-1;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: tokens.$color-on-bg;
+  cursor: pointer;
+}
+
+.auth-dialog-eye svg {
+  width: tokens.$size-2;
+  height: tokens.$size-2;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: $dialog-border;
+}
+
+.auth-dialog-forgot {
+  align-self: flex-end;
+  margin-top: calc(-1 * tokens.$size-05);
+  color: tokens.$color-on-primary;
+  font-size: tokens.$font-body-small;
+  font-weight: tokens.$font-weight-bold;
+  text-decoration: underline;
+}
+
+.auth-dialog-submit {
+  width: 100%;
+  min-height: tokens.$size-6;
+  padding: tokens.$btn-medium-padding;
+  border: $dialog-border solid tokens.$color-on-primary;
+  border-radius: tokens.$corner-medium;
+  background: tokens.$color-primary;
+  color: tokens.$color-on-primary;
+  box-shadow: tokens.$shadow-level-1;
+  font: inherit;
+  font-size: tokens.$font-label-extra-large;
+  font-weight: tokens.$font-weight-bold;
+  cursor: pointer;
+}
+
+.auth-dialog-submit:hover {
+  background: tokens.$color-primary-high;
+}
+
+.auth-dialog-divider {
+  display: flex;
+  align-items: center;
+  gap: tokens.$size-2;
+  color: tokens.$color-on-bg;
+  font-size: tokens.$font-body-small;
+  font-weight: tokens.$font-weight-bold;
+}
+
+.auth-dialog-divider::before,
+.auth-dialog-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: tokens.$color-outline-variant;
+}
+
+.auth-dialog-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.$size-2;
+  width: 100%;
+  min-height: $input-height;
+  padding: tokens.$size-1;
+  border: $dialog-border solid tokens.$color-on-primary;
+  border-radius: tokens.$corner-medium;
+  background: tokens.$color-white;
+  color: tokens.$color-on-primary;
+  font: inherit;
+  font-size: tokens.$font-body-medium;
+  font-weight: tokens.$font-weight-bold;
+}
+
+
+.auth-dialog-google:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.auth-dialog-google-icon {
+  font-family: tokens.$font-roboto;
+  font-size: tokens.$font-headline-medium;
+  font-weight: tokens.$font-weight-extra-bold;
+  line-height: 1;
+  background: conic-gradient(
+    #4285f4 0 25%,
+    #34a853 25% 45%,
+    #fbbc05 45% 70%,
+    #ea4335 70% 100%
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-dialog-bottom {
+  margin: tokens.$size-05 0 0;
+  color: tokens.$color-on-bg;
+  font-size: tokens.$font-body-small;
+  text-align: center;
+}
+
+.auth-dialog-bottom button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: tokens.$color-on-primary;
+  font: inherit;
+  font-weight: tokens.$font-weight-bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@keyframes auth-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(tokens.$size-2) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes auth-dialog-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(tokens.$size-2) scale(0.98);
+  }
+}
+
+@keyframes auth-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes auth-backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes auth-form-in {
+  from {
+    opacity: 0;
+    transform: translateY(tokens.$size-1);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-dialog {
+    max-width: calc(100vw - tokens.$size-3);
+    max-height: calc(100dvh - tokens.$size-3);
+    padding: tokens.$size-3 tokens.$size-2;
+  }
+}
+

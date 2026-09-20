@@ -1,0 +1,8 @@
+@use '../components/header/header';
+@use '../components/auth-dialog/auth-dialog';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
