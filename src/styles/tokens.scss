@@ -1,0 +1,104 @@
+// ========================================
+// COLORS — BASE
+// ========================================
+$color-white: #ffffff;
+$color-black: #000000;
+
+// COLORS — GENERAL
+$color-bg: #f9f8f3;
+$color-on-bg: #5f5d75;
+$color-on-bg-low: #737380;
+$color-bg-footer: #1e1b3a;
+$color-bg-footer-low: #2a264f;
+$color-bg-footer-lowest: #3c376e;
+$color-on-bg-footer: #b9b5c9;
+$color-surface: #fff9e5;
+$color-surface-low: #fffcf5;
+$color-primary: #ffd02b;
+$color-primary-low: #fde047;
+$color-primary-high: #e5bb00;
+$color-on-primary: #242145;
+$color-secondary: #f0eeff;
+$color-tertiary: #3a2ebf;
+$color-like: #ff4b4b;
+$color-error: #b3261e;
+$color-price-free: #0b8a8f;
+
+// COLORS — BORDERS
+$color-outline: #e5e7eb;
+$color-outline-variant: #d2d2d2;
+
+// ========================================
+// TYPOGRAPHY — FONT FAMILIES
+// ========================================
+$font-inter: 'Inter', sans-serif;
+$font-roboto: 'Roboto', sans-serif;
+
+// TYPOGRAPHY — FONT SIZES
+$font-display-large: 56px;
+$font-display-medium: 36px;
+$font-display-small: 24px;
+
+$font-headline-large: 32px;
+$font-headline-medium: 24px;
+$font-headline-small: 20px;
+
+$font-body-large: 18px;
+$font-body-medium: 16px;
+$font-body-small: 14px;
+
+$font-label-extra-large: 16px;
+$font-label-large: 14px;
+$font-label-medium: 12px;
+$font-label-small: 10px;
+
+// TYPOGRAPHY — FONT WEIGHTS
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+
+// ========================================
+// SPACING / SIZE
+// ========================================
+$size-05: 4px;
+$size-1: 8px;
+$size-2: 16px;
+$size-3: 24px;
+$size-4: 32px;
+$size-5: 40px;
+$size-6: 48px;
+$size-7: 56px;
+$size-8: 64px;
+$size-9: 72px;
+$size-10: 80px;
+$size-11: 88px;
+$size-12: 96px;
+$size-13: 104px;
+$size-14: 112px;
+$size-15: 120px;
+
+// ========================================
+// CORNERS
+// ========================================
+$corner-extra-small: 4px;
+$corner-small: 8px;
+$corner-medium: 12px;
+$corner-large: 16px;
+$corner-extra-large: 24px;
+$corner-full: 9999px;
+
+// ========================================
+// BUTTON PADDING (vertical horizontal)
+// ========================================
+$btn-large-padding: 16px 24px;
+$btn-medium-padding: 10px 20px;
+$btn-small-padding: 8px 16px;
+$btn-icon-padding: 8px;
+
+// ========================================
+// SHADOWS
+// ========================================
+$shadow-level-1: 4px 4px 0 0 $color-on-primary;
+$shadow-level-2: 6px 6px 0 0 $color-on-primary;
+$shadow-level-3: 8px 8px 0 0 $color-on-primary;
