@@ -1,0 +1,138 @@
+@use '../../styles/tokens' as tokens;
+@use 'sass:color';
+
+
+$hero-max-width: 1920px;
+$hero-card-width: 480px;
+$hero-height-desktop: 480px;
+$hero-height-tablet: 360px;
+$hero-height-mobile: 330px;
+$hero-breakpoint-tablet: 768px;
+$hero-breakpoint-phone: 375px;
+
+.hero,
+.hero * {
+  box-sizing: border-box;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: $hero-max-width;
+  min-height: $hero-height-desktop;
+  margin-inline: auto;
+  background-color: tokens.$color-bg-footer;
+  background-image:
+    linear-gradient(
+      color.change(tokens.$color-bg-footer, $alpha: 0.65),
+      color.change(tokens.$color-bg-footer, $alpha: 0.65)
+    ),
+    url('../../assets/assets/hero-img.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-container {
+  width: 100%;
+  min-width: 0;
+  padding: tokens.$size-8;
+}
+
+.hero-card {
+  width: 100%;
+  max-width: $hero-card-width;
+  padding: tokens.$size-4;
+  border: 2px solid tokens.$color-on-primary;
+  border-radius: tokens.$corner-large;
+  background: tokens.$color-white;
+  color: tokens.$color-on-primary;
+  box-shadow: tokens.$shadow-level-2;
+}
+
+.hero-title {
+  margin: 0 0 tokens.$size-2;
+  font-family: tokens.$font-inter;
+  font-size: tokens.$font-display-medium;
+  font-weight: tokens.$font-weight-extra-bold;
+  line-height: 1.12;
+}
+
+.hero-description {
+  margin: 0 0 tokens.$size-2;
+  color: tokens.$color-on-bg;
+  font-family: tokens.$font-inter;
+  font-size: tokens.$font-body-medium;
+  font-weight: tokens.$font-weight-regular;
+  line-height: 1.5;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: tokens.$btn-medium-padding;
+  border: 1px solid tokens.$color-on-primary;
+  border-radius: tokens.$corner-small;
+  background: tokens.$color-primary;
+  color: tokens.$color-on-primary;
+  font-family: tokens.$font-inter;
+  font-size: tokens.$font-label-large;
+  font-weight: tokens.$font-weight-bold;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.hero-button:hover {
+  background: tokens.$color-primary-high;
+}
+
+.hero-button:active {
+  background: tokens.$color-primary-low;
+}
+
+.hero-button:focus-visible {
+  outline: 2px solid tokens.$color-tertiary;
+  outline-offset: tokens.$size-05;
+}
+
+@media (max-width: $hero-breakpoint-tablet) {
+  .hero {
+    min-height: $hero-height-tablet;
+  }
+
+  .hero-container {
+    padding: tokens.$size-5;
+  }
+
+  .hero-card {
+    max-width: $hero-card-width;
+    padding: tokens.$size-3;
+  }
+
+  .hero-title {
+    font-size: tokens.$font-headline-large;
+  }
+
+  .hero-description {
+    font-size: tokens.$font-body-small;
+  }
+}
+
+@media (max-width: $hero-breakpoint-phone) {
+  .hero {
+    min-height: $hero-height-mobile;
+  }
+
+  .hero-container {
+    padding: tokens.$size-2;
+  }
+
+  .hero-card {
+    padding: tokens.$size-3;
+  }
+
+  .hero-title {
+    font-size: tokens.$font-headline-medium;
+  }
+}
