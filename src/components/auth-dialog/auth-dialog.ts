@@ -1,4 +1,4 @@
-type AuthMode = "login" | "register";
+type AuthMode = 'login' | 'register';
 
 interface AuthDialog {
   element: HTMLDialogElement;
@@ -6,9 +6,9 @@ interface AuthDialog {
 }
 
 export function createAuthDialog(): AuthDialog {
-  const dialog = document.createElement("dialog");
-  dialog.className = "auth-dialog";
-  dialog.setAttribute("aria-labelledby", "auth-login-title");
+  const dialog = document.createElement('dialog');
+  dialog.className = 'auth-dialog';
+  dialog.setAttribute('aria-labelledby', 'auth-login-title');
 
   dialog.innerHTML = `
     <div class="auth-dialog-content">
@@ -112,121 +112,101 @@ export function createAuthDialog(): AuthDialog {
     </div>
   `;
 
-  const loginForm = dialog.querySelector<HTMLFormElement>("#auth-login-form")!;
-  const registerForm = dialog.querySelector<HTMLFormElement>(
-    "#auth-register-form",
-  )!;
-  const tabs = dialog.querySelectorAll<HTMLButtonElement>(".auth-dialog-tab");
+  const loginForm = dialog.querySelector<HTMLFormElement>('#auth-login-form')!;
+  const registerForm = dialog.querySelector<HTMLFormElement>('#auth-register-form')!;
+  const tabs = dialog.querySelectorAll<HTMLButtonElement>('.auth-dialog-tab');
 
   let closing = false;
   let previousFocus: HTMLElement | null = null;
 
   function setMode(mode: AuthMode): void {
-    loginForm.hidden = mode !== "login";
-    registerForm.hidden = mode !== "register";
+    loginForm.hidden = mode !== 'login';
+    registerForm.hidden = mode !== 'register';
     dialog.setAttribute(
-      "aria-labelledby",
-      mode === "login" ? "auth-login-title" : "auth-register-title",
+      'aria-labelledby',
+      mode === 'login' ? 'auth-login-title' : 'auth-register-title',
     );
 
     tabs.forEach((tab) => {
       const active = tab.dataset.mode === mode;
-      tab.classList.toggle("auth-dialog-tab-active", active);
-      tab.setAttribute("aria-pressed", String(active));
+      tab.classList.toggle('auth-dialog-tab-active', active);
+      tab.setAttribute('aria-pressed', String(active));
     });
 
     if (dialog.open) {
-      const form = mode === "login" ? loginForm : registerForm;
-      form.querySelector<HTMLInputElement>("input")?.focus();
+      const form = mode === 'login' ? loginForm : registerForm;
+      form.querySelector<HTMLInputElement>('input')?.focus();
     }
   }
 
-  function open(mode: AuthMode = "login"): void {
+  function open(mode: AuthMode = 'login'): void {
     if (dialog.open) {
       if (!closing) setMode(mode);
       return;
     }
 
-    previousFocus =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+    previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setMode(mode);
     dialog.showModal();
-    (mode === "login" ? loginForm : registerForm)
-      .querySelector<HTMLInputElement>("input")
-      ?.focus();
+    (mode === 'login' ? loginForm : registerForm).querySelector<HTMLInputElement>('input')?.focus();
   }
 
   function close(): void {
     if (!dialog.open || closing) return;
     closing = true;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       dialog.close();
     } else {
-      dialog.classList.add("auth-dialog-closing");
+      dialog.classList.add('auth-dialog-closing');
     }
   }
 
-  dialog.addEventListener("animationend", (event) => {
-    if (
-      event.target === dialog &&
-      closing &&
-      event.animationName === "auth-dialog-out"
-    ) {
+  dialog.addEventListener('animationend', (event) => {
+    if (event.target === dialog && closing && event.animationName === 'auth-dialog-out') {
       dialog.close();
     }
   });
 
-  dialog.addEventListener("close", () => {
+  dialog.addEventListener('close', () => {
     closing = false;
-    dialog.classList.remove("auth-dialog-closing");
+    dialog.classList.remove('auth-dialog-closing');
 
-    if (previousFocus?.isConnected && !previousFocus.closest("[inert]")) {
+    if (previousFocus?.isConnected && !previousFocus.closest('[inert]')) {
       previousFocus.focus();
     }
   });
 
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener('cancel', (event) => {
     event.preventDefault();
     close();
   });
 
-  dialog.addEventListener("click", (event) => {
+  dialog.addEventListener('click', (event) => {
     if (event.target === dialog) close();
   });
 
-  dialog
-    .querySelectorAll<HTMLButtonElement>("[data-mode]")
-    .forEach((button) => {
-      button.addEventListener("click", () => {
-        if (button.dataset.mode === "register") setMode("register");
-        if (button.dataset.mode === "login") setMode("login");
-      });
+  dialog.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (button.dataset.mode === 'register') setMode('register');
+      if (button.dataset.mode === 'login') setMode('login');
     });
+  });
 
-  dialog
-    .querySelectorAll<HTMLButtonElement>("[data-password]")
-    .forEach((button) => {
-      button.addEventListener("click", () => {
-        const input = dialog.querySelector<HTMLInputElement>(
-          `#${button.dataset.password}`,
-        );
-        if (!input) return;
+  dialog.querySelectorAll<HTMLButtonElement>('[data-password]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const input = dialog.querySelector<HTMLInputElement>(`#${button.dataset.password}`);
+      if (!input) return;
 
-        const showPassword = input.type === "password";
-        input.type = showPassword ? "text" : "password";
-        button.setAttribute(
-          "aria-label",
-          showPassword ? "Hide password" : "Show password",
-        );
-        button.setAttribute("aria-pressed", String(showPassword));
-      });
+      const showPassword = input.type === 'password';
+      input.type = showPassword ? 'text' : 'password';
+      button.setAttribute('aria-label', showPassword ? 'Hide password' : 'Show password');
+      button.setAttribute('aria-pressed', String(showPassword));
     });
+  });
 
-  dialog.querySelectorAll<HTMLFormElement>("form").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+  dialog.querySelectorAll<HTMLFormElement>('form').forEach((form) => {
+    form.addEventListener('submit', (event) => {
       event.preventDefault();
     });
   });

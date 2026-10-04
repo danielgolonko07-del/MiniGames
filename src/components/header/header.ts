@@ -1,16 +1,45 @@
 type AuthMode = 'login' | 'register';
+import type { PageRoute } from '../../app/router';
 
-export function createHeader(openAuth: (mode: AuthMode) => void): HTMLElement {
+export function createHeader(
+  openAuth: (mode: AuthMode) => void,
+  navigate: (path: PageRoute) => void,
+): HTMLElement {
   const header = document.createElement('header');
   header.className = 'header';
+const links = `
+  <a
+    href="${import.meta.env.BASE_URL}home"
+    class="header-link"
+    data-route="/home"
+  >
+    Home
+  </a>
 
+  <a
+    href="${import.meta.env.BASE_URL}library"
+    class="header-link"
+    data-route="/library"
+  >
+    Library
+  </a>
 
-  const links = `
-    <a href="#home" class="header-link" aria-current="page">Home</a>
-    <a href="#home" class="header-link">Library</a>
-    <a href="#home" class="header-link">Tournaments</a>
-    <a href="#home" class="header-link">Community</a>
-  `;
+  <a
+    href="${import.meta.env.BASE_URL}home"
+    class="header-link"
+    data-route="/home"
+  >
+    Tournaments
+  </a>
+
+  <a
+    href="${import.meta.env.BASE_URL}home"
+    class="header-link"
+    data-route="/home"
+  >
+    Community
+  </a>
+`;
 
   const logo = `
     <a href="#home" class="header-logo" aria-label="MiniGames, Home">
