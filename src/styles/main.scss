@@ -3,9 +3,13 @@
 @use '../components/hero/hero';
 @use '../components/new-games/new-games';
 @use '../components/leaderboard/leaderboard';
+@use '../components/library/library';
+@use '../components/game-details/game-details';
+@use '../components/snackbar/snackbar';
+@use '../components/footer/footer';
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

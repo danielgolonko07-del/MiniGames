@@ -1,11 +1,9 @@
-@use "../../styles/tokens" as tokens;
-
+@use '../../styles/tokens' as tokens;
 
 $dialog-width: 420px;
 $dialog-border: 2px;
 $input-height: 48px;
 $animation-speed: 180ms;
-
 
 .auth-dialog {
   width: $dialog-width;
@@ -75,7 +73,6 @@ $animation-speed: 180ms;
   gap: tokens.$size-2;
   animation: $animation-speed ease-out;
 }
-
 
 .auth-dialog-form[hidden] {
   display: none;
@@ -213,7 +210,7 @@ $animation-speed: 180ms;
 
 .auth-dialog-divider::before,
 .auth-dialog-divider::after {
-  content: "";
+  content: '';
   flex: 1;
   height: 1px;
   background: tokens.$color-outline-variant;
@@ -236,7 +233,6 @@ $animation-speed: 180ms;
   font-weight: tokens.$font-weight-bold;
 }
 
-
 .auth-dialog-google:disabled {
   opacity: 1;
   cursor: not-allowed;
@@ -247,12 +243,7 @@ $animation-speed: 180ms;
   font-size: tokens.$font-headline-medium;
   font-weight: tokens.$font-weight-extra-bold;
   line-height: 1;
-  background: conic-gradient(
-    #4285f4 0 25%,
-    #34a853 25% 45%,
-    #fbbc05 45% 70%,
-    #ea4335 70% 100%
-  );
+  background: conic-gradient(#4285f4 0 25%, #34a853 25% 45%, #fbbc05 45% 70%, #ea4335 70% 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -333,4 +324,3 @@ $animation-speed: 180ms;
     padding: tokens.$size-3 tokens.$size-2;
   }
 }
-
