@@ -1,6 +1,7 @@
 import { createHeader } from '../components/header/header.ts';
 import { createAuthDialog } from '../components/auth-dialog/auth-dialog';
 import { createHero } from '../components/hero/hero.ts';
+import { createNewGames } from '../components/new-games/new-games.ts';
 
 
 export function createHomePage(): HTMLElement {
@@ -14,7 +15,9 @@ export function createHomePage(): HTMLElement {
 
   const hero = createHero();
 
-  page.append(header, hero, authDialog.element,);
+  const newGames = createNewGames(() => {});
+
+  page.append(header, hero, newGames, authDialog.element,);
 
   return page;
 }
