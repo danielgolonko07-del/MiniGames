@@ -2,6 +2,7 @@ import { createHeader } from '../components/header/header.ts';
 import { createAuthDialog } from '../components/auth-dialog/auth-dialog';
 import { createHero } from '../components/hero/hero.ts';
 import { createNewGames } from '../components/new-games/new-games.ts';
+import { createLeaderboard } from '../components/leaderboard/leaderboard';
 
 
 export function createHomePage(): HTMLElement {
@@ -17,7 +18,9 @@ export function createHomePage(): HTMLElement {
 
   const newGames = createNewGames(() => {});
 
-  page.append(header, hero, newGames, authDialog.element,);
+  const leaderboard = createLeaderboard();
+
+  page.append(header, hero, newGames, leaderboard, authDialog.element,);
 
   return page;
 }
