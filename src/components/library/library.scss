@@ -1,0 +1,528 @@
+@use '../../styles/tokens' as tokens;
+
+$library-max-width: 1440px;
+$library-tablet: 768px;
+$library-mobile: 375px;
+
+$library-card-min-height: 168px;
+$library-image-width: 38%;
+
+.library {
+  width: 100%;
+  max-width: $library-max-width;
+
+  margin-inline: auto;
+
+  padding: tokens.$size-6 tokens.$size-8;
+}
+
+.library-intro {
+  margin-bottom: tokens.$size-5;
+}
+
+.library-title {
+  margin: 0;
+
+  color: tokens.$color-on-bg;
+
+  font-size: tokens.$font-headline-large;
+}
+
+.library-description {
+  margin: tokens.$size-1 0 0;
+
+  color: tokens.$color-on-bg-low;
+
+  font-size: tokens.$font-body-medium;
+}
+
+/*
+ * CONTROLS
+ */
+
+.library-controls {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: tokens.$size-3;
+
+  margin-bottom: tokens.$size-3;
+}
+
+.library-categories {
+  display: flex;
+
+  flex: 1 1 auto;
+
+  gap: tokens.$size-1;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  white-space: nowrap;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.library-categories::-webkit-scrollbar {
+  display: none;
+}
+
+.library-category {
+  flex: 0 0 auto;
+
+  padding: tokens.$size-1 tokens.$size-2;
+
+  border: 1px solid tokens.$color-on-bg;
+
+  border-radius: tokens.$corner-full;
+
+  background: tokens.$color-bg;
+
+  color: tokens.$color-on-bg;
+
+  cursor: pointer;
+
+  font-size: tokens.$font-label-medium;
+
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.library-category:hover {
+  background: tokens.$color-primary-low;
+}
+
+.library-category-active {
+  background: tokens.$color-primary;
+
+  border-color: tokens.$color-on-bg;
+
+  font-weight: 600;
+}
+
+.library-sort {
+  display: flex;
+
+  flex: 0 0 auto;
+
+  align-items: center;
+
+  gap: tokens.$size-1;
+
+  padding: tokens.$size-1 tokens.$size-2;
+
+  border: 1px solid tokens.$color-on-bg;
+
+  border-radius: tokens.$corner-full;
+
+  background: tokens.$color-bg;
+
+  font-size: tokens.$font-label-medium;
+}
+
+.library-sort-select {
+  border: 0;
+
+  outline: none;
+
+  background: transparent;
+
+  color: tokens.$color-on-bg;
+
+  font: inherit;
+
+  cursor: pointer;
+}
+
+/*
+ * CARDS GRID
+ */
+
+.library-games {
+  width: 100%;
+}
+
+.library-games:not(:library-games-grid(.library-games-skeleton)):not(
+    :library-games-grid(.library-error)
+  ):not(:hlibrary-games-gridas(.library-empty)) {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: tokens.$size-2;
+}
+
+.library-card {
+  display: flex;
+
+  min-width: 0;
+  min-height: $library-card-min-height;
+
+  overflow: hidden;
+
+  border: 2px solid tokens.$color-on-bg;
+
+  border-bottom-width: tokens.$size-1;
+
+  border-radius: tokens.$corner-medium;
+
+  background: tokens.$color-bg;
+}
+
+.library-card-image-wrapper {
+  flex: 0 0 $library-image-width;
+
+  min-width: 0;
+}
+
+.library-card-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.library-card-content {
+  display: flex;
+
+  min-width: 0;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  padding: tokens.$size-2;
+}
+
+.library-card-top {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: tokens.$size-1;
+}
+
+.library-card-title-wrapper {
+  display: flex;
+
+  min-width: 0;
+
+  align-items: center;
+
+  gap: tokens.$size-1;
+}
+
+.library-card-title {
+  margin: 0;
+
+  overflow: hidden;
+
+  color: tokens.$color-on-bg;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: tokens.$font-headline-small;
+}
+
+.library-card-category {
+  flex: 0 0 auto;
+
+  padding: 2px tokens.$size-1;
+
+  border: 1px solid tokens.$color-on-bg;
+
+  border-radius: tokens.$corner-full;
+
+  font-size: tokens.$font-label-small;
+}
+
+.library-card-price {
+  flex: 0 0 auto;
+
+  color: tokens.$color-on-bg;
+
+  font-weight: 700;
+}
+
+.library-card-price-free {
+  color: tokens.$color-tertiary;
+}
+
+.library-card-description {
+  /*
+   * Story 2:
+   * trailing ellipsis,
+   * jeśli opis się nie mieści.
+   */
+
+  display: -webkit-box;
+
+  overflow: hidden;
+
+  margin: tokens.$size-2 0;
+
+  color: tokens.$color-on-bg-low;
+
+  -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: 3;
+
+  line-clamp: 3;
+
+  font-size: tokens.$font-body-small;
+}
+
+.library-card-footer {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: tokens.$size-2;
+
+  margin-top: auto;
+}
+
+.library-card-stats {
+  display: flex;
+
+  gap: tokens.$size-2;
+
+  font-size: tokens.$font-label-medium;
+}
+
+.library-card-stats span:first-child {
+  color: tokens.$color-on-bg;
+}
+
+.library-details-button {
+  padding: tokens.$size-1 tokens.$size-2;
+
+  border: 1px solid tokens.$color-on-bg;
+
+  border-radius: tokens.$corner-small;
+
+  background: tokens.$color-primary;
+
+  color: tokens.$color-on-bg;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.library-details-button:hover {
+  filter: brightness(0.95);
+}
+
+/*
+ * PAGINATION
+ */
+
+.library-pagination {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: tokens.$size-1;
+
+  margin-top: tokens.$size-4;
+}
+
+.library-page-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: tokens.$size-4;
+
+  height: tokens.$size-4;
+
+  border: 1px solid tokens.$color-on-bg;
+
+  border-radius: tokens.$corner-full;
+
+  background: tokens.$color-bg;
+
+  color: tokens.$color-on-bg;
+
+  cursor: pointer;
+}
+
+.library-page-button:hover:not(:disabled) {
+  background: tokens.$color-primary-low;
+}
+
+.library-page-active {
+  background: tokens.$color-on-bg;
+
+  color: tokens.$color-white;
+}
+
+.library-page-button:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+}
+
+/*
+ * LOADING
+ */
+
+.library-games-skeleton {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: tokens.$size-2;
+}
+
+.library-card-skeleton {
+  min-height: $library-card-min-height;
+
+  border-radius: tokens.$corner-medium;
+
+  background: tokens.$color-outline;
+
+  animation: library-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.library-category-skeleton {
+  width: tokens.$size-8;
+
+  height: tokens.$size-3;
+
+  flex: 0 0 auto;
+
+  border-radius: tokens.$corner-full;
+
+  background: tokens.$color-outline;
+
+  animation: library-pulse 1.2s ease-in-out infinite alternate;
+}
+
+/*
+ * ERROR / EMPTY
+ */
+
+.library-error,
+.library-empty {
+  display: flex;
+
+  min-height: $library-card-min-height;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: tokens.$size-2;
+
+  padding: tokens.$size-4;
+
+  border: 1px solid tokens.$color-outline;
+
+  border-radius: tokens.$corner-medium;
+
+  text-align: center;
+}
+
+.library-retry {
+  padding: tokens.$size-1 tokens.$size-3;
+
+  border: 0;
+
+  border-radius: tokens.$corner-full;
+
+  background: tokens.$color-primary;
+
+  cursor: pointer;
+}
+
+@keyframes library-pulse {
+  from {
+    opacity: 0.35;
+  }
+
+  to {
+    opacity: 0.75;
+  }
+}
+
+/*
+ * TABLET
+ */
+
+@media (max-width: $library-tablet) {
+  .library {
+    padding: tokens.$size-4 tokens.$size-3;
+  }
+
+  .library-controls {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .library-categories {
+    width: 100%;
+  }
+
+  .library-sort {
+    align-self: flex-end;
+  }
+
+  .library-games:not(:library-games-grid(.library-games-skeleton)):not(
+      :library-games-grid(.library-error)
+    ):not(:library-games-grid(.library-empty)),
+  .library-games-skeleton {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+ * MOBILE
+ */
+
+@media (max-width: $library-mobile) {
+  .library {
+    padding-inline: tokens.$size-2;
+  }
+
+  .library-sort {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+  .library-card {
+    min-height: auto;
+
+    flex-direction: column;
+  }
+
+  .library-card-image-wrapper {
+    width: 100%;
+    height: 180px;
+
+    flex-basis: auto;
+  }
+
+  .library-card-title-wrapper {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+}

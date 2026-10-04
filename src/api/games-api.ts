@@ -1,27 +1,60 @@
-import type { Game, GamesResponse } from '../types/game';
+import type {
+  CategoriesResponse,
+  Game,
+  GamesResponse,
+  LibraryGamesQuery,
+  LibraryGamesResponse,
+} from '../types/game';
 
-const API_URL =
-  'https://faxb76kxra.execute-api.eu-central-1.amazonaws.com/api';
+const API_URL = 'https://faxb76kxra.execute-api.eu-central-1.amazonaws.com/api';
 
-const API_ORIGIN =
-  'https://faxb76kxra.execute-api.eu-central-1.amazonaws.com';
-
-export async function getFeaturedGames(): Promise<Game[]> {
-  const response = await fetch(`${API_URL}/games?featured=true`);
+async function requestJson<T>(url: string, signal?: AbortSignal): Promise<T> {
+  const response = await fetch(url, {
+    headers: {
+      Accept: 'application/json',
+    },
+    signal,
+  });
 
   if (!response.ok) {
-    throw new Error(`HTTP error: ${response.status}`);
+    throw new Error(`Request failed: ${response.status}`);
   }
 
-  const result = (await response.json()) as GamesResponse;
+  return (await response.json()) as T;
+}
+
+/*
+  HOME SLIDER
+*/
+
+export async function getFeaturedGames(): Promise<Game[]> {
+  const result = await requestJson<GamesResponse>(`${API_URL}/games?featured=true`);
 
   return result.data;
 }
 
-export function getGameImageUrl(path: string): string {
-  if (path.startsWith('http://') || path.startsWith('https://')) {
-    return path;
-  }
+/*
+  LIBRARY CATEGORIES
+*/
 
-  return new URL(path, API_ORIGIN).href;
+export async function getCategories(): Promise<CategoriesResponse> {
+  return requestJson<CategoriesResponse>(`${API_URL}/categories`);
+}
+
+/*
+  LIBRARY GAMES
+*/
+
+export async function getLibraryGames(query: LibraryGamesQuery): Promise<LibraryGamesResponse> {
+  const parameters = new URLSearchParams({
+    category: query.category,
+    sort: query.sort,
+    page: String(query.page),
+    limit: String(query.limit),
+  });
+
+  return requestJson<LibraryGamesResponse>(
+    `${API_URL}/games?${parameters.toString()}`,
+    query.signal,
+  );
 }
