@@ -4,7 +4,6 @@ $tablet-breakpoint: 768px;
 $phone-breakpoint: 375px;
 $menu-speed: 250ms;
 
-
 .header {
   position: relative;
   z-index: 20;
@@ -38,8 +37,6 @@ $menu-speed: 250ms;
   line-height: 1;
   text-decoration: none;
 }
-
-
 
 .header-navigation {
   display: flex;
@@ -156,7 +153,6 @@ $menu-speed: 250ms;
 .mobile-menu .header-logo {
   color: tokens.$color-white;
 }
-
 
 .mobile-menu-close {
   display: grid;

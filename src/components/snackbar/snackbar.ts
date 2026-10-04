@@ -2,12 +2,8 @@ type SnackbarType = 'success' | 'error';
 
 let snackbarTimer: number | undefined;
 
-export function showSnackbar(
-  message: string,
-  type: SnackbarType,
-): void {
-  let snackbar =
-    document.querySelector<HTMLDivElement>('.snackbar');
+export function showSnackbar(message: string, type: SnackbarType): void {
+  let snackbar = document.querySelector<HTMLDivElement>('.snackbar');
 
   if (!snackbar) {
     snackbar = document.createElement('div');
